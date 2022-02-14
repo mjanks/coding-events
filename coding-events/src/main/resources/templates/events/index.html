@@ -15,12 +15,14 @@
             <th>Name</th>
             <th>Description</th>
             <th>Address</th>
+            <th>Code</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.getKey()}"></td>
         <td th:text="${event.getValue()}"></td>
         <td th:replace="fragments :: hangout"></td>
+        <td th:replace="fragments :: pic"></td>
     </tr>
 </table>
 
