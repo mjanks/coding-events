@@ -1,8 +1,7 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Date;
 import java.util.Objects;
 
 public class Event {
@@ -21,15 +20,30 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
+    @NotBlank(message = "Location is required")
+    @NotNull(message = "Location is required")
+    private String location;
+
+    @AssertTrue(message = "You must register!")
+    private boolean mustRegister;
+
+    @Positive(message = "Minimum number of attendees is one.")
+    private int numAttendees;
+
+    @Max(value = 2, message = "May only bring up to 2 guests")
+    private int numGuests;
+
     public Event(String name, String description, String contactEmail) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+    }
+
+    public Event() {
         id = nextId;
         nextId++;
     }
-
-    public Event() {}
 
     public String getName() {
         return name;
@@ -57,6 +71,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(boolean mustRegister) {
+        this.mustRegister = mustRegister;
+    }
+
+    public int getNumAttendees() {
+        return numAttendees;
+    }
+
+    public void setNumAttendees(int numAttendees) {
+        this.numAttendees = numAttendees;
+    }
+
+    public int getNumGuests() {
+        return numGuests;
+    }
+
+    public void setNumGuests(int numGuests) {
+        this.numGuests = numGuests;
     }
 
     @Override
